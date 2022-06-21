@@ -9,12 +9,10 @@ function ItemDetailContainer() {
 
     const [product, setProduct] = useState();
     const { id } = useParams();
-
-    console.log(id)
-
     useEffect(() => {
         getProductById(parseInt(id))
             .then(res => { setProduct(res) })
+            // eslint-disable-next-line
     }, [])
 
     if (product === undefined) {
