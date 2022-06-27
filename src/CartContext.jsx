@@ -1,5 +1,4 @@
-import { createContext, useContext, useState } from "react";
-import products from './utilities/products';
+import { createContext, useState } from "react";
 
 export const contexto = createContext();
 export const Provider = contexto.Provider;
@@ -30,12 +29,32 @@ export function CartContext({ children }) {
         }
     }
 
-    const calcularTotal = () => {
-       let total = 0;
+    const calcularUnidades = () => {
+        let cantidadTotal = 0;
         carrito.forEach(e => {
-           total = total + (e.price * e.quantity);
+            cantidadTotal += e.quantity;
+        });
+        setCantidadItems(cantidadTotal);
+    }
+
+    const calcularTotal = () => {
+        let total = 0;
+        carrito.forEach(e => {
+            total = total + (e.price * e.quantity);
         });
         setPrecioTotal(total);
+        calcularUnidades();
+    }
+
+    const vaciarCarrito = () => {
+        setCarrito([]);
+        setCantidadItems(0);
+    }
+
+    const evitarRepetidos = (producto) => {
+        return carrito.find(e => {
+            return e.id === producto.id;
+        })
     }
 
     const contenidoContexto = {
@@ -44,7 +63,10 @@ export function CartContext({ children }) {
         precioTotal: precioTotal,
         comprobarCarrito: comprobarCarrito,
         calcularTotal: calcularTotal,
+        vaciarCarrito: vaciarCarrito,
+        evitarRepetidos: evitarRepetidos,
     }
+
 
     return (
         <Provider value={contenidoContexto}>

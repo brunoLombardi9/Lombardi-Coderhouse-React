@@ -118,12 +118,6 @@ export default function Navbar() {
           </IconButton>
         </DrawerHeader>
 
-        <ul>
-          <li>
-            <Link to='./'>Home</Link>
-          </li>
-        </ul>
-
         <Divider />
 
         <List>
