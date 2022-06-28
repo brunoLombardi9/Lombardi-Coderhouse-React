@@ -14,6 +14,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CartWidget from './CartWidget';
 import { Link } from 'react-router-dom';
+import { Grid } from '@mui/material';
 
 const drawerWidth = 200;
 
@@ -89,10 +90,11 @@ export default function Navbar() {
           >
             <MenuIcon />
           </IconButton>
-
-          <Link to='./' >
-            <Typography fontFamily={"Pattaya"} fontSize={"2.5rem"} mr="auto" ml="auto" color="white">Exodus</Typography>
-          </Link>
+          <Grid container justifyContent="center">
+            <Link to='./' >
+              <Typography fontFamily={"Pattaya"} fontSize={"2.5rem"} color="white">Exodus</Typography>
+            </Link>
+          </Grid>
 
           <CartWidget></CartWidget>
         </Toolbar>

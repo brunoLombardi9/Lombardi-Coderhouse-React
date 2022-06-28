@@ -1,7 +1,9 @@
 import { Button, Grid, Typography } from "@mui/material";
-import { useContext } from "react";
+import ClearIcon from '@mui/icons-material/Clear';
+import { useContext, useEffect } from "react";
 import { contexto } from "../CartContext";
 import './Carrito.css';
+import { Link } from "react-router-dom";
 
 function Carrito() {
 
@@ -9,14 +11,20 @@ function Carrito() {
     const carrito = resultado.carrito;
     const precioTotal = resultado.precioTotal;
     const vaciarCarrito = resultado.vaciarCarrito;
+    const calcularTotal = resultado.calcularTotal;
+    const eliminarItem = resultado.eliminarItem;
 
     const nuevosProductos = carrito.map(producto =>
         <tr>
             <td>{producto.brand} {producto.name}</td>
             <td>{producto.quantity}</td>
             <td>{producto.price} USD</td>
+            <td><Button variant="contained" onClick={() => eliminarItem(`${producto.id}`)}><ClearIcon></ClearIcon></Button></td>
         </tr>
-    );
+    )
+    useEffect(() => {
+        calcularTotal();
+    }, [carrito]);
 
     if (carrito.length > 0) {
         return (
@@ -54,9 +62,10 @@ function Carrito() {
         )
     } else {
         return (
-            <Grid container justifyContent="center">
-                <Grid item>
-                    <Typography variant="h3">Carrito Vacio</Typography>
+            <Grid container justifyContent="center" height="20vh">
+                <Typography variant="h3">Carrito Vacio</Typography>
+                <Grid container justifyContent="center" alignItems="center" >
+                    <Link to='/'><Button variant="contained">Regresar al index</Button></Link>
                 </Grid>
             </Grid>
         )

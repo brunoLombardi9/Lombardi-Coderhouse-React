@@ -24,8 +24,9 @@ export function CartContext({ children }) {
                 quantity: unidades.cantidad,
 
             };
-            carrito.push(nuevoProducto);
-            calcularTotal();
+            const nuevoCarrito = [...carrito];
+            nuevoCarrito.push(nuevoProducto);
+            setCarrito(nuevoCarrito);
         }
     }
 
@@ -40,7 +41,7 @@ export function CartContext({ children }) {
     const calcularTotal = () => {
         let total = 0;
         carrito.forEach(e => {
-            total = total + (e.price * e.quantity);
+            total += (e.price * e.quantity);
         });
         setPrecioTotal(total);
         calcularUnidades();
@@ -48,13 +49,20 @@ export function CartContext({ children }) {
 
     const vaciarCarrito = () => {
         setCarrito([]);
-        setCantidadItems(0);
+        setCantidadItems(carrito.length);
     }
 
     const evitarRepetidos = (producto) => {
         return carrito.find(e => {
             return e.id === producto.id;
         })
+    }
+
+    const eliminarItem = (id) => {
+        const nuevoArray = [...carrito];
+        const item = nuevoArray.find(e => e.id === id);
+        nuevoArray.splice(nuevoArray.indexOf(item), 1);
+        setCarrito(nuevoArray);
     }
 
     const contenidoContexto = {
@@ -65,6 +73,7 @@ export function CartContext({ children }) {
         calcularTotal: calcularTotal,
         vaciarCarrito: vaciarCarrito,
         evitarRepetidos: evitarRepetidos,
+        eliminarItem: eliminarItem,
     }
 
 
