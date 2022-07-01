@@ -1,63 +1,74 @@
 
 import { useState, useEffect } from 'react';
-import products from '../utilities/products';
-import timeOut from '../utilities/timeOut';
 import ItemList from './ItemList';
 import { Grid } from '@mui/material';
 import Cargando from './Cargando';
 import { useParams } from 'react-router-dom';
+import { db } from '../utilities/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
-const bajos = products.filter(product => product.category === "Basses");
-const guitarras = products.filter(product => product.category === "Guitars");
-const baterias = products.filter(product => product.category === "Drums");
-const teclados = products.filter(product => product.category === "Keyboards");
-const microfonos = products.filter(product => product.category === "Mics");
-const consolas = products.filter(product => product.category === "Consoles");
-const amplificadores = products.filter(product => product.category === "Amplifiers");
-const pedales = products.filter(product => product.category === "Pedals");
-let itemsAMostrar = [];
 
 function ItemsListContainer() {
     const [items, setItems] = useState([])
-    const resultado = useParams();
-
-    switch (resultado.categoria) {
-        case "Bajos":
-            itemsAMostrar = bajos;
-            break;
-        case "Guitarras":
-            itemsAMostrar = guitarras;
-            break;
-        case "Baterias":
-            itemsAMostrar = baterias;
-            break;
-        case "Teclados":
-            itemsAMostrar = teclados;
-            break;
-        case "Microfonos":
-            itemsAMostrar = microfonos;
-            break;
-        case "Consolas":
-            itemsAMostrar = consolas;
-            break;
-        case "Amplificadores":
-            itemsAMostrar = amplificadores;
-            break;
-        case "Pedales":
-            itemsAMostrar = pedales;
-            break;
-        default:
-            itemsAMostrar = products;
-    }
+    const { categoria } = useParams();
+    const [loading, setLoading] = useState(true);
+    let itemsAMostrar = [];
 
 
     useEffect(() => {
-        timeOut(2000, itemsAMostrar)
-            .then(res => setItems(res))
-    }, [itemsAMostrar]);
+
+        const productosDb = collection(db, "productos");
+        const query = getDocs(productosDb);
+
+        query
+            .then(res => {
+                const productosExtraidos = res.docs.map(e => e.data());
+                console.log(productosExtraidos);
+
+                switch (categoria) {
+                    case "Bajos":
+                        const bajos = productosExtraidos.filter(product => product.category === "Basses");
+                        itemsAMostrar = bajos;
+                        break;
+                    case "Guitarras":
+                        const guitarras = productosExtraidos.filter(product => product.category === "Guitaras");
+                        itemsAMostrar = guitarras;
+                        break;
+                    case "Baterias":
+                        const baterias = productosExtraidos.filter(product => product.category === "Drums");
+                        itemsAMostrar = baterias;
+                        break;
+                    case "Teclados":
+                        const teclados = productosExtraidos.filter(product => product.category === "Keyboards");
+                        itemsAMostrar = teclados;
+                        break;
+                    case "Microfonos":
+                        const microfonos = productosExtraidos.filter(product => product.category === "Mics");
+                        itemsAMostrar = microfonos;
+                        break;
+                    case "Consolas":
+                        const consolas = productosExtraidos.filter(product => product.category === "Consoles");
+                        itemsAMostrar = consolas;
+                        break;
+                    case "Amplificadores":
+                        const amplificadores = productosExtraidos.filter(product => product.category === "Amplifiers");
+                        itemsAMostrar = amplificadores;
+                        break;
+                    case "Pedales":
+                        const pedales = productosExtraidos.filter(product => product.category === "Pedals");
+                        itemsAMostrar = pedales;
+                        break;
+                    default:
+                        itemsAMostrar = productosExtraidos;
+                }
+                setItems(itemsAMostrar);
+                setLoading(false);
+            })
+            .catch(error => console.log(error));
+    }, [categoria]);
 
 
-    if (items.length === 0) {
+    if (loading) {
         return <Cargando></Cargando>
 
     } else {

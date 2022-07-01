@@ -22,7 +22,6 @@ export function CartContext({ children }) {
                 name: producto.title,
                 price: producto.price,
                 quantity: unidades.cantidad,
-
             };
             const nuevoCarrito = [...carrito];
             nuevoCarrito.push(nuevoProducto);
