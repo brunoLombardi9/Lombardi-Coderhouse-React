@@ -125,10 +125,10 @@ export default function Navbar() {
         <List>
 
           <ul>
-            <li><Link to='./category/Bajos'>Bajos</Link></li>
-            <li><Link to='./category/Guitarras'>Guitarras</Link></li>
-            <li><Link to='./category/Baterias'>Baterías</Link></li>
-            <li><Link to='./category/Teclados'>Teclados</Link></li>
+            <li><Link to='./category/Basses'>Bajos</Link></li>
+            <li><Link to='./category/Guitars'>Guitarras</Link></li>
+            <li><Link to='./category/Drums'>Baterías</Link></li>
+            <li><Link to='./category/Keyboards'>Teclados</Link></li>
 
           </ul>
         </List>
@@ -136,10 +136,10 @@ export default function Navbar() {
         <List>
 
           <ul>
-            <li><Link to='./category/Microfonos'>Micrófonos</Link></li>
-            <li><Link to='./category/Consolas'>Consolas</Link></li>
-            <li><Link to='./category/Amplificadores'>Amplificadores</Link></li>
-            <li><Link to='./category/Pedales'>Pedales</Link></li>
+            <li><Link to='./category/Mics'>Micrófonos</Link></li>
+            <li><Link to='./category/Consoles'>Consolas</Link></li>
+            <li><Link to='./category/Amplifiers'>Amplificadores</Link></li>
+            <li><Link to='./category/Pedals'>Pedales</Link></li>
 
           </ul>
         </List>
