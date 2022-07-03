@@ -8,16 +8,14 @@ function CartWidget() {
 
   const resultado = useContext(contexto);
   const carrito = resultado.carrito;
+  const cantidadItems = resultado.cantidadItems;
 
-if(carrito.length === 0){
-  return
-}else{
   return (
     <Link to="./cart">
-      <Button color="secondary" variant="contained"><ShoppingCartOutlinedIcon fontSize="medium"></ShoppingCartOutlinedIcon> {resultado.cantidadItems}</Button>
+      <Button color="secondary" variant="contained"><ShoppingCartOutlinedIcon fontSize="medium"></ShoppingCartOutlinedIcon> {cantidadItems}</Button>
     </Link>
   );
-}
+
 
 }
 
