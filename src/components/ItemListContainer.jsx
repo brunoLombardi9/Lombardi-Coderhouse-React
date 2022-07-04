@@ -21,16 +21,15 @@ function ItemsListContainer() {
 
         if (categoria === undefined) {
             consulta = getDocs(productosDb);
-            setLoading(true);
         } else {
             productosFiltrados = query(productosDb, where("category", "==", categoria))
             consulta = getDocs(productosFiltrados);
-            setLoading(true);
         }
+
+        setLoading(true);
 
         consulta
             .then(res => {
-                console.log(res)
                 const productosExtraidos = res.docs.map(e => e.data());
                 setItems(productosExtraidos)
                 setLoading(false);
@@ -39,7 +38,7 @@ function ItemsListContainer() {
             .catch(error => console.log(error));
     }, [categoria]);
 
-    console.log(items)
+
     if (loading) {
         return <Cargando></Cargando>
 

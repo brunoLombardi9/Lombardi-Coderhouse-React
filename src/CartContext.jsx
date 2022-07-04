@@ -10,7 +10,7 @@ export function CartContext({ children }) {
     const [cantidadItems, setCantidadItems] = useState(0);
     const [precioTotal, setPrecioTotal] = useState(0);
 
-    const comprobarCarrito = (producto, unidades) => {
+    const agregarAlCarrito = (producto, unidades) => {
         const isInCart = carrito.find(e => e.id === producto.id);
 
         if (isInCart) {
@@ -21,7 +21,7 @@ export function CartContext({ children }) {
                 brand: producto.brand,
                 name: producto.title,
                 price: producto.price,
-                quantity: unidades.cantidad,
+                quantity: unidades,
             };
             const nuevoCarrito = [...carrito];
             nuevoCarrito.push(nuevoProducto);
@@ -68,7 +68,7 @@ export function CartContext({ children }) {
         carrito: carrito,
         cantidadItems: cantidadItems,
         precioTotal: precioTotal,
-        comprobarCarrito: comprobarCarrito,
+        agregarAlCarrito: agregarAlCarrito,
         calcularTotal: calcularTotal,
         vaciarCarrito: vaciarCarrito,
         evitarRepetidos: evitarRepetidos,
