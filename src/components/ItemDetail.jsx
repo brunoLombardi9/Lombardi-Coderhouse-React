@@ -8,7 +8,6 @@ import { contexto } from '../CartContext';
 function ItemDetail({ product }) {
 
     const resultado = useContext(contexto);
-    const carrito = resultado.carrito;
     const evitarRepetidos = resultado.evitarRepetidos;
     const [cantidad, setCantidad] = useState();
 

@@ -8,13 +8,12 @@ import { useEffect } from 'react';
 function CartWidget() {
 
   const resultado = useContext(contexto);
-  const carrito = resultado.carrito;
   const calcularTotal = resultado.calcularTotal
   const cantidadItems = resultado.cantidadItems;
 
   useEffect(() => {
     calcularTotal();
-}, [carrito]);
+});
 
   return (
     <Link to="./cart">

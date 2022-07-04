@@ -21,10 +21,10 @@ function Carrito() {
             <td>{producto.price} USD</td>
             <td><Button variant="contained" onClick={() => eliminarItem(`${producto.id}`)}><ClearIcon></ClearIcon></Button></td>
         </tr>
-    )
+    );
     useEffect(() => {
         calcularTotal();
-    }, [carrito]);
+    });
 
     if (carrito.length > 0) {
         return (
