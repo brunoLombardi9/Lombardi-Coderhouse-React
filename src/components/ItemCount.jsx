@@ -29,7 +29,11 @@ function ItemCount({ initial, stock, onAdd, product }) {
 
     function confirmarContador() {
         onAdd(contador);
-        agregarAlCarrito(product, contador);
+        if (contador === 0) {
+            return;
+        } else {
+            agregarAlCarrito(product, contador);
+        }
     }
 
 
@@ -41,7 +45,7 @@ function ItemCount({ initial, stock, onAdd, product }) {
                 <ButtonSmall variant="contained" onClick={sumar}><AddIcon></AddIcon></ButtonSmall>
             </CardActions>
             <Grid container justifyContent="center">
-                <Button onClick={confirmarContador}>Agregar al Carrito</Button>
+                <Button variant="contained" sx={{marginTop: "1.5rem"}} onClick={confirmarContador}>Agregar al Carrito</Button>
             </Grid>
         </>
     )
