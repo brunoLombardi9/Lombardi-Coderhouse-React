@@ -110,9 +110,11 @@ export default function Navbar() {
             boxSizing: 'border-box',
           },
         }}
-        variant="persistent"
+        variant="temporary"
         anchor="left"
         open={open}
+        onClose={(_, reason) =>
+          reason === 'backdropClick' && setOpen(false)}
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
