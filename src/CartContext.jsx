@@ -90,7 +90,7 @@ export function CartContext({ children }) {
             setCarrito(carritoLocalStorage);
         }
 
-    }, [])
+    }, [carrito]);
 
     return (
         <Provider value={contenidoContexto}>
