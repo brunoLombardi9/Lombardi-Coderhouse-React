@@ -1,0 +1,18 @@
+li {
+    display: flex;
+    justify-content: center;
+}
+
+li:hover {
+    width: 100%;
+    background-color: #cdcdcd;
+    width: 100%;
+}
+
+a {
+    color: black;
+}
+
+.active {
+    color:brown;
+}

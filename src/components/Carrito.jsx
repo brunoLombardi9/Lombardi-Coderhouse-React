@@ -62,7 +62,11 @@ function Carrito() {
     });
 
     if (idOrden !== "") {
-        return (<Typography textAlign="center" variant="h2">Gracias por su compra! la referencia de su orden es : {idOrden}</Typography>)
+        return (
+            <Grid container>
+                <Typography textAlign="center" variant="h2">Gracias por su compra! la referencia de su orden es : {idOrden}</Typography>
+            </Grid>
+        )
     }
 
     if (carrito.length > 0) {

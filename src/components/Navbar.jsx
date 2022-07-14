@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './NavBar.css'
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -13,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CartWidget from './CartWidget';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
 const drawerWidth = 200;
@@ -91,9 +92,9 @@ export default function Navbar() {
             <MenuIcon />
           </IconButton>
           <Grid container justifyContent="center">
-            <Link to='./' >
+            <NavLink to='./' >
               <Typography fontFamily={"Pattaya"} fontSize={"2.5rem"} color="white">Exodus</Typography>
-            </Link>
+            </NavLink>
           </Grid>
 
           <CartWidget></CartWidget>
@@ -123,29 +124,34 @@ export default function Navbar() {
         </DrawerHeader>
 
         <Divider />
-
-        <List>
-
-          <ul>
-            <li><Link to='./category/Basses'>Bajos</Link></li>
-            <li><Link to='./category/Guitars'>Guitarras</Link></li>
-            <li><Link to='./category/Drums'>Baterías</Link></li>
-            <li><Link to='./category/Keyboards'>Teclados</Link></li>
-
-          </ul>
-        </List>
+        <Typography variant="h5" textAlign="center">Instrumentos</Typography>
         <Divider />
+
+        <List sx={{ mb: "2" }}>
+
+          <li><NavLink to='./category/Basses'>Bajos</NavLink></li>
+          <li><NavLink to='./category/Guitars'>Guitarras</NavLink></li>
+          <li><NavLink to='./category/Drums'>Baterías</NavLink></li>
+          <li><NavLink to='./category/Keyboards'>Teclados</NavLink></li>
+
+        </List>
+
+        <Divider />
+        <Typography variant="h5" textAlign="center">Electrónica</Typography>
+        <Divider />
+
+
         <List>
 
-          <ul>
-            <li><Link to='./category/Mics'>Micrófonos</Link></li>
-            <li><Link to='./category/Consoles'>Consolas</Link></li>
-            <li><Link to='./category/Amplifiers'>Amplificadores</Link></li>
-            <li><Link to='./category/Pedals'>Pedales</Link></li>
+          <li><NavLink to='./category/Mics'>Micrófonos</NavLink></li>
+          <li><NavLink to='./category/Consoles'>Consolas</NavLink></li>
+          <li><NavLink to='./category/Amplifiers'>Amplificadores</NavLink></li>
+          <li><NavLink to='./category/Pedals'>Pedales</NavLink></li>
 
-          </ul>
         </List>
+
       </Drawer>
+
       <Main open={open}>
         <DrawerHeader />
 

@@ -17,8 +17,8 @@ function ItemDetail({ product }) {
     }
 
     return (
-        <Grid container justifyContent="center">
-            <Grid item md={6} justifyContent="center">
+        <Grid container justifyContent="center" alignItems="center">
+            <Grid item md={4} justifyContent="center">
                 <CardMedia
                     component="img"
                     image={product.pictureUrl}
