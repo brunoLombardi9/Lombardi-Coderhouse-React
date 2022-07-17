@@ -7,12 +7,14 @@ import { Link } from "react-router-dom";
 import Form from "./Form";
 import { db } from "../utilities/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import Cargando from "./Cargando";
 
 function Carrito() {
 
     const resultado = useContext(contexto);
-    const [data, setData] = useState({ name: "", email: "", phone: "" });
+    const [data, setData] = useState({ name: "", email: "", phone: "", address: "" });
     const [idOrden, setIdOrden] = useState("");
+    const [loading, setLoading] = useState();
 
 
     const carrito = resultado.carrito;
@@ -26,13 +28,15 @@ function Carrito() {
     }
 
     const handleSubmit = (e) => {
+        setLoading(true);
         e.preventDefault();
 
         const orden = {
             cliente: {
                 nombre: data.name,
                 telefono: data.phone,
-                email: data.email
+                email: data.email,
+                direccion: data.address
             },
             carrito,
             total: precioTotal,
@@ -45,6 +49,7 @@ function Carrito() {
             .then(res => {
                 setIdOrden(res.id);
                 vaciarCarrito();
+                setLoading(false);
             })
             .catch(error => console.log(error));
     }
@@ -57,9 +62,16 @@ function Carrito() {
             <td><Button variant="contained" onClick={() => eliminarItem(`${producto.id}`)}><ClearIcon></ClearIcon></Button></td>
         </tr>
     );
+
     useEffect(() => {
         calcularTotal();
     });
+
+    if (loading) {
+        return (
+            <Cargando></Cargando>
+        )
+    }
 
     if (idOrden !== "") {
         return (

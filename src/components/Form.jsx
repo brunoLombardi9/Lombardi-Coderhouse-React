@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 import { useContext } from "react";
 import { contexto } from "../CartContext";
 import "./Form.css";
@@ -12,41 +12,60 @@ function Form({ handleChange, data, handleSubmit }) {
     return (
         <Grid container justifyContent="center" >
             <form onSubmit={handleSubmit}>
-                <input
+                <Grid flexDirection="column">
+                <TextField
                     placeholder="Nombre"
                     type="text"
                     name="name"
                     onChange={handleChange}
                     value={data.name}
+                    fullWidth="true"
+                    autoComplete
                     required
                 />
 
-                <input
+                <TextField
                     placeholder="E-mail"
                     type="email"
                     name="email"
                     onChange={handleChange}
                     value={data.email}
+                    fullWidth="true"
+                    autoComplete
                     required
                 />
 
-                <input
+                <TextField
                     placeholder="Teléfono"
                     type="number"
                     name="phone"
                     onChange={handleChange}
                     value={data.phone}
+                    fullWidth="true"
+                    autoComplete
                     required
                 />
 
+                <TextField
+                    placeholder="Dirección"
+                    type="text"
+                    name="address"
+                    onChange={handleChange}
+                    value={data.address}
+                    fullWidth="true"
+                    autoComplete
+                    required
+                />
+                </Grid>
+
 
                 <Grid container justifyContent="space-around" spacing={2} mt={2}>
-                
-                        <Button variant="outlined" onClick={vaciarCarrito}>Vaciar carrito</Button>
-                        <Button variant="contained" 
-                        disabled={data.name === "" || data.email === "" || data.phone === ""}
+
+                    <Button variant="outlined" onClick={vaciarCarrito}>Vaciar carrito</Button>
+                    <Button variant="contained"
+                        disabled={data.name === "" || data.email === "" || data.phone === "" || data.address === ""}
                         onClick={handleSubmit}>Finalizar Compra</Button>
-                  
+
                 </Grid>
 
             </form>

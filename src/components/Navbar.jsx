@@ -14,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CartWidget from './CartWidget';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
 const drawerWidth = 200;
@@ -149,6 +149,11 @@ export default function Navbar() {
           <li><NavLink to='./category/Pedals'>Pedales</NavLink></li>
 
         </List>
+
+
+        <Divider />
+        <Link to='./tracking'><Typography variant="h5" color="red" textAlign="center">Seguir Orden</Typography></Link>
+        <Divider />
 
       </Drawer>
 
