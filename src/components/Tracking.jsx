@@ -3,6 +3,7 @@ import { collection, doc, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../utilities/firebase";
 import { Link } from "react-router-dom";
+import TablaPedido from "./TablaPedido";
 // import { useParams } from 'react-router-dom';
 
 
@@ -12,10 +13,9 @@ function Tracking() {
     const [loading, setLoading] = useState();
     const [tracking, setTracking] = useState("");
 
-
     useEffect(() => {
-
-    }, [input])
+        console.log(tracking)
+    }, [tracking])
 
     const handleChange = (e) => {
         setInput(e.target.value);
@@ -31,12 +31,10 @@ function Tracking() {
                 const ordenesObtenidas = res.docs;
                 const buscarOrden = ordenesObtenidas.filter(e => e.id === input);
                 const ordenBuscada = buscarOrden.map(e => e.data())
-                setTracking(ordenBuscada);
-                console.log(tracking)
-
+                return ordenBuscada
             })
+            .then(res => setTracking(res))
             .catch(error => console.log(error))
-
 
 
     }
@@ -62,7 +60,7 @@ function Tracking() {
     } else if (tracking !== "" && tracking !== [] && tracking !== undefined) {
         return (
             <Grid container>
-                <h1>orden</h1>
+                <TablaPedido array={tracking} ></TablaPedido>
             </Grid>
         )
     }
