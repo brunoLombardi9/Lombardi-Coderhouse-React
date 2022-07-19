@@ -1,6 +1,6 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { collection, getDocs, query } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { db } from "../utilities/firebase";
 import TablaPedido from "./TablaPedido";
 import Cargando from "./Cargando";
@@ -15,6 +15,7 @@ function Tracking() {
     const [tracking, setTracking] = useState([]);
     const [error, setError] = useState(false);
     const [resultado, setResultado] = useState(false)
+
 
 
     const handleChange = (e) => {
@@ -78,7 +79,7 @@ function Tracking() {
                 </Grid>
 
                 <Grid container justifyContent="center">
-                    <Button onClick={handleSubmit} variant="contained" sx={{ mt: "20px" }}>Consultar</Button>
+                    <Link to={`./${input}`}><Button onClick={handleSubmit} variant="contained" sx={{ mt: "20px" }}>Consultar</Button></Link>
                 </Grid>
 
             </>
@@ -90,7 +91,7 @@ function Tracking() {
                 <Typography variant="h4" mb="20px" >Orden: {input}</Typography>
                 <TablaPedido array={tracking} ></TablaPedido>
                 <Grid item >
-                    <Button onClick={resetTracking} variant="contained" sx={{ mt: "20px", m: "15px" }}>Buscar de nuevo</Button>
+                   <Link to="/tracking"><Button variant="contained" onClick={resetTracking} sx={{ mt: "20px", m: "15px" }}>Buscar de nuevo</Button></Link>
                 </Grid>
                 <Grid item >
                     <Link to="/"><Button variant="contained" sx={{ mt: "20px", m: "15px" }}>Volver al Index</Button></Link>
@@ -106,7 +107,7 @@ function Tracking() {
             <Grid container justifyContent="center" >
                 <Typography variant="h2" textAlign="center" width="100%">No encontramos lo que buscabas</Typography>
                 <Grid item >
-                    <Button onClick={resetTracking} variant="contained" sx={{ mt: "20px", m: "15px" }}>Buscar de nuevo</Button>
+                <Link to="/tracking"><Button variant="contained" onClick={resetTracking} sx={{ mt: "20px", m: "15px" }}>Buscar de nuevo</Button></Link>
                 </Grid>
                 <Grid item >
                     <Link to="/"><Button variant="contained" sx={{ mt: "20px", m: "15px" }}>Volver al Index</Button></Link>
@@ -118,7 +119,7 @@ function Tracking() {
             <Grid container justifyContent="center" >
                 <Typography variant="h2" textAlign="center" width="100%">Hubo un problema, intente nuevamente</Typography>
                 <Grid item >
-                    <Button onClick={resetTracking} variant="contained" sx={{ mt: "20px", m: "15px" }}>Buscar de nuevo</Button>
+                <Link to="/tracking"><Button variant="contained" onClick={resetTracking} sx={{ mt: "20px", m: "15px" }}>Buscar de nuevo</Button></Link>
                 </Grid>
                 <Grid item >
                     <Link to="/"><Button variant="contained" sx={{ mt: "20px", m: "15px" }}>Volver al Index</Button></Link>
