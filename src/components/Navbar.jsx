@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './NavBar.css'
+import './NavBar.css';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -14,8 +14,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CartWidget from './CartWidget';
-import { Link, NavLink } from 'react-router-dom';
-import { Grid } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import { Button, Grid } from '@mui/material';
 
 const drawerWidth = 200;
 
@@ -124,10 +124,10 @@ export default function Navbar() {
         </DrawerHeader>
 
         <Divider />
-        <Typography variant="h5" textAlign="center">Instrumentos</Typography>
+        <Typography variant="h5" textAlign="center" className="categorias">Instrumentos</Typography>
         <Divider />
 
-        <List sx={{ mb: "2" }}>
+        <List sx={{ mb: "20px" }}>
 
           <li><NavLink to='./category/Basses'>Bajos</NavLink></li>
           <li><NavLink to='./category/Guitars'>Guitarras</NavLink></li>
@@ -137,7 +137,7 @@ export default function Navbar() {
         </List>
 
         <Divider />
-        <Typography variant="h5" textAlign="center">Electrónica</Typography>
+        <Typography variant="h5" textAlign="center" className="categorias">Electrónica</Typography>
         <Divider />
 
 
@@ -151,9 +151,9 @@ export default function Navbar() {
         </List>
 
 
-        <Divider />
-        <Link to='./tracking'><Typography variant="h5" color="red" textAlign="center">Seguir Orden</Typography></Link>
-        <Divider />
+       <Grid container justifyContent="center">
+        <NavLink to='./tracking'><Button variant="contained" sx={{borderRadius:"100px"}} >Seguir Orden</Button></NavLink>
+        </Grid>
 
       </Drawer>
 

@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 
 
 
-export const tablaProductos = (array) => {
+export const tablaProductos = (array,ultimaCelda) => {
     const pedido = array[0].carrito;
 
     const tabla = pedido.map(producto =>
@@ -10,7 +10,7 @@ export const tablaProductos = (array) => {
             <td>{producto.brand} {producto.name}</td>
             <td>{producto.quantity}</td>
             <td>{producto.price} USD</td>
-            <td></td>
+            <td>{ultimaCelda}</td>
         </tr>
     );
     return tabla

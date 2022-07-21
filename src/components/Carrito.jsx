@@ -83,35 +83,38 @@ function Carrito() {
 
     if (carrito.length > 0) {
         return (
-            <Grid container justifyContent="center">
-                <Grid item>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th>Cantidad</th>
-                                <th>Precio</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {nuevosProductos}
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>{precioTotal} USD</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
+            <>
+                <Grid container justifyContent="center">
                     <Grid item>
-                        <Form handleChange={handleChange} data={data} handleSubmit={handleSubmit}></Form>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {nuevosProductos}
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>{precioTotal} USD</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
                     </Grid>
 
                 </Grid>
 
-            </Grid>
+                <Grid item>
+                    <Form handleChange={handleChange} data={data} handleSubmit={handleSubmit}></Form>
+                </Grid>
+            </>
         )
     } else {
         return (

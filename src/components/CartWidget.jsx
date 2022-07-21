@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { contexto } from "../CartContext";
 import { Link } from "react-router-dom";
 import { useEffect } from 'react';
+import './CartWidget.css'
 
 function CartWidget() {
 
@@ -17,7 +18,7 @@ function CartWidget() {
 
   return (
     <Link to="./cart">
-      <Button color="secondary" variant="contained"><ShoppingCartOutlinedIcon fontSize="medium"></ShoppingCartOutlinedIcon> {cantidadItems}</Button>
+      <Button color="secondary" variant="contained" className={cantidadItems > 0 ? "enCarrito" : ""}><ShoppingCartOutlinedIcon fontSize="medium"></ShoppingCartOutlinedIcon> {cantidadItems > 0 ? cantidadItems : ""} </Button>
     </Link>
   );
 

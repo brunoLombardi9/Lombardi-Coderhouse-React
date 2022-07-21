@@ -17,7 +17,6 @@ function Tracking() {
     const [resultado, setResultado] = useState(false)
 
 
-
     const handleChange = (e) => {
         setInput(e.target.value);
     }
@@ -38,10 +37,14 @@ function Tracking() {
 
         consulta
             .then(res => {
-                const ordenesObtenidas = res.docs;
-                const buscarOrden = ordenesObtenidas.filter(e => e.id === input);
-                const ordenBuscada = buscarOrden.map(e => e.data());
-                return ordenBuscada;
+                return res
+            }
+            )
+            .then(res => {
+                const todasLasOrdenes = res.docs;
+                const filtrarOrdenes = todasLasOrdenes.filter(e => e.id === input);
+                const ordenEncontrada = filtrarOrdenes.map(e => e.data());
+                return ordenEncontrada;
             })
             .then(res => {
                 if (res.length > 0) {
@@ -51,9 +54,33 @@ function Tracking() {
                 setLoading(false);
             }
             )
-            .catch(setError(true) )
+            .catch(setError(true))
 
     }
+
+    const sinResultados = () => {
+        if (resultado && tracking.length === 0) {
+            return "No encontramos lo que buscabas";
+        }
+    }
+
+    const huboError = () => {
+        if (error) {
+            return "Hubo un problema, intente nuevamente";
+        }
+    }
+
+    const huboResultado = () => {
+        if(resultado && tracking.length > 0){
+            return(
+                <>
+                <Typography variant="h4" mb="20px" >Orden: {input}</Typography>
+                <TablaPedido array={tracking} ></TablaPedido>
+                </>
+            )
+        }
+    }
+
 
 
     if (resultado === false && tracking.length === 0) {
@@ -61,7 +88,7 @@ function Tracking() {
             <>
                 <Grid container justifyContent="center" >
                     <Grid item>
-                        <Typography variant="h3" >Ingrese el Id de su compra:</Typography>
+                        <Typography variant="h3">Ingrese el Id de su compra:</Typography>
                         <TextField
                             placeholder="Id de compra"
                             type="text"
@@ -75,58 +102,35 @@ function Tracking() {
                             required
                         />
                     </Grid>
-
                 </Grid>
 
                 <Grid container justifyContent="center">
                     <Link to={`./${input}`}><Button onClick={handleSubmit} variant="contained" sx={{ mt: "20px" }}>Consultar</Button></Link>
                 </Grid>
-
             </>
 
-        )
-    } else if (resultado && tracking.length > 0) {
-        return (
-            <Grid container justifyContent="center" >
-                <Typography variant="h4" mb="20px" >Orden: {input}</Typography>
-                <TablaPedido array={tracking} ></TablaPedido>
-                <Grid item >
-                   <Link to="/tracking"><Button variant="contained" onClick={resetTracking} sx={{ mt: "20px", m: "15px" }}>Buscar de nuevo</Button></Link>
-                </Grid>
-                <Grid item >
-                    <Link to="/"><Button variant="contained" sx={{ mt: "20px", m: "15px" }}>Volver al Index</Button></Link>
-                </Grid>
-            </Grid>
         )
     } else if (loading) {
         return (
             <Cargando></Cargando>
         )
-    } else if (resultado && tracking.length === 0) {
+    } else {
         return (
             <Grid container justifyContent="center" >
-                <Typography variant="h2" textAlign="center" width="100%">No encontramos lo que buscabas</Typography>
+                <Typography variant="h2" textAlign="center" width="100%">
+                    {sinResultados}
+                    {huboError}
+                    {huboResultado}
+                </Typography>
                 <Grid item >
-                <Link to="/tracking"><Button variant="contained" onClick={resetTracking} sx={{ mt: "20px", m: "15px" }}>Buscar de nuevo</Button></Link>
+                    <Link to="/tracking"><Button variant="contained" onClick={resetTracking} sx={{ mt: "20px", m: "15px" }}>Buscar de nuevo</Button></Link>
                 </Grid>
                 <Grid item >
                     <Link to="/"><Button variant="contained" sx={{ mt: "20px", m: "15px" }}>Volver al Index</Button></Link>
                 </Grid>
             </Grid>
         )
-    } else if (error) {
-        return (
-            <Grid container justifyContent="center" >
-                <Typography variant="h2" textAlign="center" width="100%">Hubo un problema, intente nuevamente</Typography>
-                <Grid item >
-                <Link to="/tracking"><Button variant="contained" onClick={resetTracking} sx={{ mt: "20px", m: "15px" }}>Buscar de nuevo</Button></Link>
-                </Grid>
-                <Grid item >
-                    <Link to="/"><Button variant="contained" sx={{ mt: "20px", m: "15px" }}>Volver al Index</Button></Link>
-                </Grid>
-            </Grid>
-        )
-    }
+    } 
 
 }
 

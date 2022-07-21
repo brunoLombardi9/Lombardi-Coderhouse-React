@@ -76,7 +76,7 @@ function ItemsListContainer() {
     } else {
         return (
             <Grid container justifyContent="center" spacing={2}>
-                <Typography variant="h2" width="100%" textAlign="center">{categoriaTraducida}</Typography>
+                <Typography variant="h2" width="100%" textAlign="center" fontFamily={'Oxygen' }>{categoriaTraducida}</Typography>
                 <ItemList productos={items}></ItemList>
             </Grid>
         );
