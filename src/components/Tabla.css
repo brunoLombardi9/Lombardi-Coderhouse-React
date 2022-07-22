@@ -18,3 +18,6 @@ table td {
     background: #ffffff;
     color: #313030;
 }
+table *{
+    font-size: 2rem;
+}

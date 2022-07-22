@@ -20,8 +20,7 @@ function Form({ handleChange, data, handleSubmit }) {
                             name="name"
                             onChange={handleChange}
                             value={data.name}
-                            fullWidth="true"
-                            autoComplete
+                            fullWidth={true}
                             required
                         />
 
@@ -31,8 +30,7 @@ function Form({ handleChange, data, handleSubmit }) {
                             name="email"
                             onChange={handleChange}
                             value={data.email}
-                            fullWidth="true"
-                            autoComplete
+                            fullWidth={true}
                             required
                         />
 
@@ -42,8 +40,7 @@ function Form({ handleChange, data, handleSubmit }) {
                             name="phone"
                             onChange={handleChange}
                             value={data.phone}
-                            fullWidth="true"
-                            autoComplete
+                            fullWidth={true}
                             required
                         />
 
@@ -53,8 +50,7 @@ function Form({ handleChange, data, handleSubmit }) {
                             name="address"
                             onChange={handleChange}
                             value={data.address}
-                            fullWidth="true"
-                            autoComplete
+                            fullWidth={true}
                             required
                         />
                     </Grid>

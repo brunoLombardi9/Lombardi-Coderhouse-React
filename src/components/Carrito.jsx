@@ -2,11 +2,11 @@ import { Button, Grid, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import { useContext, useEffect, useState } from "react";
 import { contexto } from "../CartContext";
-import './Carrito.css';
+import './Tabla.css';
 import { Link } from "react-router-dom";
 import Form from "./Form";
-import { db } from "../utilities/firebase";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { ordenes } from "../utilities/firebase";
+import { addDoc, serverTimestamp } from "firebase/firestore";
 import Cargando from "./Cargando";
 
 function Carrito() {
@@ -43,7 +43,6 @@ function Carrito() {
             fecha: serverTimestamp()
         }
 
-        const ordenes = collection(db, "ordenes");
 
         addDoc(ordenes, orden)
             .then(res => {
@@ -55,7 +54,7 @@ function Carrito() {
     }
 
     const nuevosProductos = carrito.map(producto =>
-        <tr>
+        <tr key={producto.id}>
             <td>{producto.brand} {producto.name}</td>
             <td>{producto.quantity}</td>
             <td>{producto.price} USD</td>

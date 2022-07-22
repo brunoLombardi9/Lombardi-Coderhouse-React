@@ -1,11 +1,10 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
-import { collection, getDocs, query } from "firebase/firestore";
+import { getDocs, query } from "firebase/firestore";
 import { useState } from "react";
-import { db } from "../utilities/firebase";
+import { ordenes } from "../utilities/firebase";
 import TablaPedido from "./TablaPedido";
 import Cargando from "./Cargando";
 import { Link } from "react-router-dom";
-
 
 
 
@@ -30,7 +29,6 @@ function Tracking() {
 
     const handleSubmit = () => {
         setLoading(true);
-        const ordenes = collection(db, "ordenes");
         const ordenesFiltradas = query(ordenes);
         const consulta = getDocs(ordenesFiltradas);
 
@@ -54,31 +52,8 @@ function Tracking() {
                 setLoading(false);
             }
             )
-            .catch(setError(true))
+            .catch(setError(true));
 
-    }
-
-    const sinResultados = () => {
-        if (resultado && tracking.length === 0) {
-            return "No encontramos lo que buscabas";
-        }
-    }
-
-    const huboError = () => {
-        if (error) {
-            return "Hubo un problema, intente nuevamente";
-        }
-    }
-
-    const huboResultado = () => {
-        if(resultado && tracking.length > 0){
-            return(
-                <>
-                <Typography variant="h4" mb="20px" >Orden: {input}</Typography>
-                <TablaPedido array={tracking} ></TablaPedido>
-                </>
-            )
-        }
     }
 
 
@@ -115,12 +90,21 @@ function Tracking() {
             <Cargando></Cargando>
         )
     } else {
+        let contenido;
+        if (resultado && tracking.length === 0) { contenido = "No encontramos lo que buscabas" }
+        if (error) { contenido = "Hubo un problema, intente nuevamente" }
+        if (resultado && tracking.length > 0) {
+            contenido = 
+            <>
+                <Typography variant="h4" mb="20px" >Orden: {input}</Typography>
+                <TablaPedido array={tracking} ></TablaPedido>
+            </>;
+        }
+
         return (
             <Grid container justifyContent="center" >
                 <Typography variant="h2" textAlign="center" width="100%">
-                    {sinResultados}
-                    {huboError}
-                    {huboResultado}
+                    {contenido}
                 </Typography>
                 <Grid item >
                     <Link to="/tracking"><Button variant="contained" onClick={resetTracking} sx={{ mt: "20px", m: "15px" }}>Buscar de nuevo</Button></Link>
@@ -130,7 +114,7 @@ function Tracking() {
                 </Grid>
             </Grid>
         )
-    } 
+    }
 
 }
 

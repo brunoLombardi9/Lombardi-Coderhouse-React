@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-
+import './Tabla.css';
 
 
 export const tablaProductos = (array,ultimaCelda) => {
