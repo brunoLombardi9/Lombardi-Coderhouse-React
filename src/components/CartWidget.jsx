@@ -13,7 +13,7 @@ function CartWidget() {
   const cantidadItems = resultado.cantidadItems;
 
   useEffect(() => {
-    calcularTotal();
+    calcularTotal(); 
 });
 
   return (

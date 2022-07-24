@@ -11,7 +11,7 @@ function Form({ handleChange, data, handleSubmit }) {
 
     return (
         <Grid container justifyContent="center">
-            <Grid item width="50%" mt="20px">
+            <Grid item width="60%" mt="20px">
                 <form onSubmit={handleSubmit}>
                     <Grid flexDirection="column">
                         <TextField
@@ -58,9 +58,10 @@ function Form({ handleChange, data, handleSubmit }) {
 
                     <Grid container justifyContent="space-around" spacing={2} mt={2}>
 
-                        <Button variant="outlined" onClick={vaciarCarrito}>Vaciar carrito</Button>
+                        <Button variant="outlined" onClick={vaciarCarrito} sx={{mt:"10px"}}>Vaciar carrito</Button>
                         <Button variant="contained"
                             disabled={data.name === "" || data.email === "" || data.phone === "" || data.address === ""}
+                            sx={{mt:"10px"}}
                             onClick={handleSubmit}>Finalizar Compra</Button>
 
                     </Grid>

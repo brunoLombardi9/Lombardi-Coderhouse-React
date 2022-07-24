@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { productosDb } from "../utilities/firebase";
 import Cargando from "./Cargando";
+import Error from "./Error";
 import ItemDetail from "./ItemDetail";
 
 function ItemDetailContainer() {
@@ -11,7 +12,7 @@ function ItemDetailContainer() {
     const [product, setProduct] = useState();
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
-
+    const [error, setError] = useState(false);
 
     useEffect(() => {
 
@@ -25,6 +26,7 @@ function ItemDetailContainer() {
                 setProduct(producto);
                 setLoading(false);
             })
+            .catch(setError(true))
     }, [id]);
 
 
@@ -33,7 +35,9 @@ function ItemDetailContainer() {
     } else {
         return (
             <Grid container justifyContent={"center"}>
-                <ItemDetail product={product}></ItemDetail>
+                {error ?
+                <ItemDetail product={product}></ItemDetail> :
+                <Error/>}
             </Grid>
         )
     }

@@ -1,5 +1,10 @@
 # Entrega de proyecto final - React-Coderhouse
 
+## Vista previa: 
+https://lombardi-coderhouse-react.vercel.app/
+
+
+
 ## Uso e instalación:
 1. Clonar proyecto desde https://github.com/brunoLombardi9/lombardi-coderhouse-react.git
 
@@ -10,12 +15,13 @@
 
 ## Generalidades
 
+Estado loading = true siempre retorna render de loader (Cargando).
 
-Estado loading = true siempre retorna render de loader en el componente Cargando.
+Estado error = true siempre retorna pantalla de error al obtener datos (Error).
 
-Estado error = true siempre retorna pantalla de error al obtener datos.
+En el archivo firebase.js se encuentra la configuración para acceder a la base de datos de Firestore. Recibe las keys para acceder  Firebase desde archivo .env , el mismo esta incluido en el repositorio del proyecto para facilitar la corrección del proyecto.
 
-En el archivo firebase.js se encuentra la configuración para acceder a la base de datos de Firestore. Recibe las keys para acceder  Firebase desde archivo .env .
+Carrito de compras persiste su contenido de forma local.
 
 
 # Librerías
@@ -39,14 +45,36 @@ Se utilizan funciones y métodos de la librería para hacer consultas y peticion
 ### `React router: `
  Se aplica para crear navegación a través de rutas dentro del sitio. Las rutas están declaradas dentro de los componentes Route nesteados dentro del componente App.
 
+### `React toastify: `
+Se usa para desplegar alert cuando un producto es agregado al carrito.
+
 # Componentes
+
+## App:
+Componente padre de toda la aplicación, desde App se renderizan todos los componentes nesteados dentro de este. En el se encuentran las rutas disponibles para navegar en el sitio y el contexto del carrito de compras (CartContext).
+
+`ThemeProvider:` Se usa este componente proveniente de MUI para dar estilos al sitio de forma general, aplicando el patron provider.
+
+`ToastContainer:` Componente proveniente de React toastify, se usa para que la aplicacion sea capas de desplegar notificaciones en forma de toast.
+
  ## NavBar:
 Muestra logo del sitio, botón de carrito (CartWidget) y botón de hamburguesa, este ultimo al ser clickeado desplega sidebar.
 
-`drawerWidth:` define el ancho que tendrá al sidebar.
+`drawerWidth:` Define el ancho que tendrá al sidebar.
 
-`Drawer:` es el sidebar del sitio, contiene el menú de de navegación y se despliega al clickear boton de hamburguesa.
+`AppBar:` Es el header del sitio, contiene Logo del sitio, icono de carrito de compras (CartWidget)y boton de hamburguesa.
 
+`Drawer:` Es el sidebar del sitio, contiene el menú de de navegación y se despliega al clickear boton de hamburguesa.
+
+## CartWidget:
+Es el ícono de carrito que se encuentra en el navbar, funciona como link a la ruta "./cart". Utiliza el estado "cantidadItems" proveniente del contexto del carrito (CartContext) para conseguir la cantidad de articulos añadidos al carrito. Al renderizar el componente valida la cantidad articulos en el carrito, si es mayor a 0 muestra la cantidad de articulos y cambia el color del icono.
+
+## CartContext:
+Componente que se comporta como provider, aporta a la aplicacion estados sobre informacion del carrito y la logica para agregar y eliminar productos a este. 
+Permite a la aplicacion persistir informacion del carrito de forma local.
+
+## Carrito: 
+Componente que recibe métodos provenientes de CartContext. Al renderizarse evalua contenido del carrito, si este no esta vacio, muestra el contenido del mismo a traves de tablas y muestra formulario (Form) para llenar datos de la orden de compra. Si el carrito esta vacio muestra texto informadolo.
 
  ## ItemListContainer:
  En el se hace consulta a Firestore para conseguir lista de productos y filtrarlos según la categoría en la que se este, de no haber ninguna categoría seleccionada se mostraran todos los productos ordenados por categorías.
@@ -68,7 +96,25 @@ Renderiza al componente ItemList y le pasa los 	productos obtenidos de la base d
 Muestra información del producto seleccionado que llega via props. Al hacer el render hace validación acerca de si el producto mostrado ya se encuentra añadido al carrito, en el caso de ya estar en el carrito se muestra botón para “Agregar al carrito”pero en estado disabled, si el producto no esta en el carrito se muestra componente ItemCount.
 
 ## ItemCount:
-Muestra los botones para seleccionar la cantidad de unidades a añadir del producto al carrito, esta siendo limitada por el stock disponible del producto, también muestra el botón “Agregar al carrito”
+Muestra los botones para seleccionar la cantidad de unidades a añadir del producto al carrito, esta siendo limitada por el stock disponible del producto, también muestra el botón “Agregar al carrito”.
+Al agregar producto al carrito, se despliega alert a traves de toast, utilizando la libreria react toastify.
+
+## Cargando:
+Componente que renderiza loader de carga.
+
+## Error:
+Componente que renderiza pantalla de error.
+
+## Tracking:
+Componente que permite filtrar ordenes de compra generadas a traves de su numero de Id, busca en la base de datos en Firestore y si encuentra resultados los muestra en pantalla en forma de tabla (TablaPedido).
+
+## TablaPedido:
+Renderiza tabla con los datos de la orden de compra encontrada en la busqueda que se efectua en el componente Tracking.
+
+## Form:
+Renderiza un formulario controlado a través de estados. Los datos ingresados forman parte de la orden de compra que se sube a Firestore para conservar los datos del cliente.
+
+
 
 
 

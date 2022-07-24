@@ -3,6 +3,8 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Button, CardActions, Grid, styled, Typography } from '@mui/material';
 import { contexto } from '../CartContext';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ButtonSmall = styled(Button)({
     borderRadius: "100px",
@@ -33,7 +35,20 @@ function ItemCount({ initial, stock, onAdd, product }) {
             return;
         } else {
             agregarAlCarrito(product, contador);
+            notificacion();
         }
+    }
+
+    function notificacion() {
+        toast('¡Producto agregado!', {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
     }
 
 

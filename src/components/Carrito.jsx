@@ -8,6 +8,7 @@ import Form from "./Form";
 import { ordenes } from "../utilities/firebase";
 import { addDoc, serverTimestamp } from "firebase/firestore";
 import Cargando from "./Cargando";
+import Error from "./Error";
 
 function Carrito() {
 
@@ -15,6 +16,7 @@ function Carrito() {
     const [data, setData] = useState({ name: "", email: "", phone: "", address: "" });
     const [idOrden, setIdOrden] = useState("");
     const [loading, setLoading] = useState();
+    const [error, setError] = useState(false);
 
 
     const carrito = resultado.carrito;
@@ -50,7 +52,7 @@ function Carrito() {
                 vaciarCarrito();
                 setLoading(false);
             })
-            .catch(error => console.log(error));
+            .catch(setError(true));
     }
 
     const nuevosProductos = carrito.map(producto =>
@@ -70,17 +72,17 @@ function Carrito() {
         return (
             <Cargando></Cargando>
         )
-    }
-
-    if (idOrden !== "") {
+    } else if (idOrden !== "") {
         return (
             <Grid container>
                 <Typography textAlign="center" variant="h2">Gracias por su compra! la referencia de su orden es : {idOrden}</Typography>
             </Grid>
         )
-    }
-
-    if (carrito.length > 0) {
+    } else if (error) {
+        return (
+            <Error/>
+        )
+    } else if (carrito.length > 0) {
         return (
             <>
                 <Grid container justifyContent="center">
