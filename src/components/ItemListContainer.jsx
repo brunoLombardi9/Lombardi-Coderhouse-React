@@ -4,8 +4,8 @@ import ItemList from './ItemList';
 import { Grid, Typography } from '@mui/material';
 import Cargando from './Cargando';
 import { useParams } from 'react-router-dom';
-import { db } from '../utilities/firebase';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { productosDb } from '../utilities/firebase';
+import { getDocs, query, where } from 'firebase/firestore';
 
 
 function ItemsListContainer() {
@@ -16,7 +16,6 @@ function ItemsListContainer() {
 
     useEffect(() => {
 
-        const productosDb = collection(db, "products");
         let productosFiltrados;
         let consulta;
 

@@ -11,6 +11,7 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_appId
 };
 
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+export const productosDb = collection(db, "products");
 export const ordenes = collection(db, "ordenes");

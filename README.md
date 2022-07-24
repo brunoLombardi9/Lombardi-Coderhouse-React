@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Entrega de proyecto final - React-Coderhouse
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Uso e instalación:
+1. Clonar proyecto desde https://github.com/brunoLombardi9/lombardi-coderhouse-react.git
 
-## Available Scripts
+2. Ejecutar npm install .
 
-In the project directory, you can run:
+3. Ejectutar npm start .
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Generalidades
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+Estado loading = true siempre retorna render de loader en el componente Cargando.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Estado error = true siempre retorna pantalla de error al obtener datos.
 
-### `npm run build`
+En el archivo firebase.js se encuentra la configuración para acceder a la base de datos de Firestore. Recibe las keys para acceder  Firebase desde archivo .env .
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Librerías
+### `Material UI: `
+Se implementa para faciltar maquetación del sitio. Se utiliza principalmente para lograr crear componentes responsive y el navbar con su sidebar desplegable.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### `Material icons: `
+Se utiliza para traer los svg que estan dentro de los botones.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### `Emotion: `
+Se utiliza en conjunto con MUI para dar estilos al sitio.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+### `Firebase: `
+Se utilizan funciones y métodos de la librería para hacer consultas y peticiones a la base de datos creada en Firestore.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `React router: `
+ Se aplica para crear navegación a través de rutas dentro del sitio. Las rutas están declaradas dentro de los componentes Route nesteados dentro del componente App.
 
-### Code Splitting
+# Componentes
+ ## NavBar:
+Muestra logo del sitio, botón de carrito (CartWidget) y botón de hamburguesa, este ultimo al ser clickeado desplega sidebar.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+`drawerWidth:` define el ancho que tendrá al sidebar.
 
-### Analyzing the Bundle Size
+`Drawer:` es el sidebar del sitio, contiene el menú de de navegación y se despliega al clickear boton de hamburguesa.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+ ## ItemListContainer:
+ En el se hace consulta a Firestore para conseguir lista de productos y filtrarlos según la categoría en la que se este, de no haber ninguna categoría seleccionada se mostraran todos los productos ordenados por categorías.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Se utiliza switch para setear estado “categoriaTraducida” para mostrar en pantalla el nombre de la categoría en español, ya que desde la base de datos la misma llega originalmente en ingles.
 
-### Advanced Configuration
+Renderiza al componente ItemList y le pasa los 	productos obtenidos de la base de datos mediante props.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+ ## ItemList:
+ Recibe la lista de productos como prop a través de ItemListContainer  y retorna cards (Item) con cada uno de ellos.
 
-### Deployment
+ ## Item:
+ Renderiza las cards donde se muestran productos. El botón “Ver detalle” funciona como link a la ruta “/detail/(id del producto seleccionado), lo cual renderiza el componente ItemDetailContainer” .
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+ ## ItemDetailContainer:
+ Hace consulta a la base de datos para traer información de un producto puntual basándose en su id, el cual se obtiene mediante el hook UseParams. Retorna componente ItemDetail.
 
-### `npm run build` fails to minify
+## ItemDetail:
+Muestra información del producto seleccionado que llega via props. Al hacer el render hace validación acerca de si el producto mostrado ya se encuentra añadido al carrito, en el caso de ya estar en el carrito se muestra botón para “Agregar al carrito”pero en estado disabled, si el producto no esta en el carrito se muestra componente ItemCount.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## ItemCount:
+Muestra los botones para seleccionar la cantidad de unidades a añadir del producto al carrito, esta siendo limitada por el stock disponible del producto, también muestra el botón “Agregar al carrito”
+
+
+

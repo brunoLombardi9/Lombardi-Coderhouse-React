@@ -19,5 +19,11 @@ table td {
     color: #313030;
 }
 table *{
-    font-size: 2rem;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 720px) {
+    table *{
+        font-size: 1rem;
+    }
 }

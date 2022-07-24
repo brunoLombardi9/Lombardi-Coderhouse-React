@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material";
-import { collection, doc, getDoc } from "firebase/firestore";
+import {  doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { db } from "../utilities/firebase";
+import { productosDb } from "../utilities/firebase";
 import Cargando from "./Cargando";
 import ItemDetail from "./ItemDetail";
 
@@ -16,7 +16,6 @@ function ItemDetailContainer() {
     useEffect(() => {
 
         setLoading(true)
-        const productosDb = collection(db, "products");
         const refProducto = doc(productosDb, id);
         const consulta = getDoc(refProducto);
 
@@ -26,8 +25,7 @@ function ItemDetailContainer() {
                 setProduct(producto);
                 setLoading(false);
             })
-        // eslint-disable-next-line
-    }, []);
+    }, [id]);
 
 
     if (loading) {
