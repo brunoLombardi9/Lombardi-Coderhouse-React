@@ -1,9 +1,10 @@
 # Entrega de proyecto final - React-Coderhouse
 
 ## Vista previa: 
-https://lombardi-coderhouse-react.vercel.app/
 
+![GIF](https://user-images.githubusercontent.com/95322998/180665872-43404220-6d31-434e-af0f-47a2fdf5e3c6.gif)
 
+Link ==> https://lombardi-coderhouse-react.vercel.app/
 
 ## Uso e instalación:
 1. Clonar proyecto desde https://github.com/brunoLombardi9/lombardi-coderhouse-react.git
