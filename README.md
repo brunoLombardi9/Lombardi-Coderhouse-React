@@ -110,7 +110,12 @@ Componente que renderiza pantalla de error.
 Componente que permite filtrar ordenes de compra generadas a traves de su numero de Id, busca en la base de datos en Firestore y si encuentra resultados los muestra en pantalla en forma de tabla (TablaPedido).
 
 ## TablaPedido:
-Renderiza tabla con los datos de la orden de compra encontrada en la busqueda que se efectua en el componente Tracking.
+Renderiza tabla con los datos de la orden de compra encontrada en la busqueda que se efectua en el componente Tracking y lo pasa como prop al componente tabla.
+
+## Tabla:
+Componente que recibe 2 parametros:
+`productos:`  es la informacion que se vera de los productos a mostrar (Producto, Cantidad, Precio).
+`precioFinal:` el valor debe ser el precio total los productos a mostrar.
 
 ## Form:
 Renderiza un formulario controlado a través de estados. Los datos ingresados forman parte de la orden de compra que se sube a Firestore para conservar los datos del cliente.

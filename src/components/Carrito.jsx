@@ -9,6 +9,7 @@ import { ordenes } from "../utilities/firebase";
 import { addDoc, serverTimestamp } from "firebase/firestore";
 import Cargando from "./Cargando";
 import Error from "./Error";
+import Tabla from "./Tabla";
 
 function Carrito() {
 
@@ -55,14 +56,6 @@ function Carrito() {
             .catch(setError(true));
     }
 
-    const nuevosProductos = carrito.map(producto =>
-        <tr key={producto.id}>
-            <td>{producto.brand} {producto.name}</td>
-            <td>{producto.quantity}</td>
-            <td>{producto.price} USD</td>
-            <td><Button variant="contained" onClick={() => eliminarItem(`${producto.id}`)}><ClearIcon></ClearIcon></Button></td>
-        </tr>
-    );
 
     useEffect(() => {
         calcularTotal();
@@ -74,43 +67,28 @@ function Carrito() {
         )
     } else if (idOrden !== "") {
         return (
-            <Grid container>
+            <Grid container justifyContent="center">
                 <Typography textAlign="center" variant="h2">Gracias por su compra! la referencia de su orden es : {idOrden}</Typography>
             </Grid>
         )
     } else if (error) {
         return (
-            <Error/>
+            <Error />
         )
     } else if (carrito.length > 0) {
+
+        const nuevosProductos = carrito.map(producto =>
+            <tr key={producto.id}>
+                <td>{producto.brand} {producto.name}</td>
+                <td>{producto.quantity}</td>
+                <td>{producto.price} USD</td>
+                <td><Button variant="contained" onClick={() => eliminarItem(`${producto.id}`)}><ClearIcon></ClearIcon></Button></td>
+            </tr>
+        );
+
         return (
             <>
-                <Grid container justifyContent="center">
-                    <Grid item>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {nuevosProductos}
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>{precioTotal} USD</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-
-                    </Grid>
-
-                </Grid>
+                <Tabla productos={nuevosProductos} precioFinal={precioTotal}></Tabla>
 
                 <Grid item>
                     <Form handleChange={handleChange} data={data} handleSubmit={handleSubmit}></Form>
