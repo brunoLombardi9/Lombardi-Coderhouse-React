@@ -113,7 +113,7 @@ Componente que permite filtrar ordenes de compra generadas a traves de su numero
 Renderiza tabla con los datos de la orden de compra encontrada en la busqueda que se efectua en el componente Tracking y lo pasa como prop al componente tabla.
 
 ## Tabla:
-Componente que recibe 2 parametros:
+Componente que renderiza tabla y recibe 2 parametros:
 
 `productos:`  es la informacion que se vera de los productos a mostrar (Producto, Cantidad, Precio).
 
