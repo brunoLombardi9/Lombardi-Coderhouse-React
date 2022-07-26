@@ -114,7 +114,9 @@ Renderiza tabla con los datos de la orden de compra encontrada en la busqueda qu
 
 ## Tabla:
 Componente que recibe 2 parametros:
+
 `productos:`  es la informacion que se vera de los productos a mostrar (Producto, Cantidad, Precio).
+
 `precioFinal:` el valor debe ser el precio total los productos a mostrar.
 
 ## Form:
