@@ -6,6 +6,7 @@ import Cargando from './Cargando';
 import { useParams } from 'react-router-dom';
 import { productosDb } from '../utilities/firebase';
 import { getDocs, query, where } from 'firebase/firestore';
+import Error from './Error';
 
 
 function ItemsListContainer() {
@@ -13,6 +14,7 @@ function ItemsListContainer() {
     const { categoria } = useParams();
     const [categoriaTraducida, setCategoriaTraducida] = useState();
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
 
@@ -65,17 +67,23 @@ function ItemsListContainer() {
                 setLoading(false);
 
             })
-            .catch(error => console.log(error));
+            .catch(err => {
+                if(err){setError(true)}
+            });
     }, [categoria]);
 
 
     if (loading) {
-        return <Cargando></Cargando>
+        return <Cargando/>
 
+    } else if (error) {
+        return (
+            <Error/>
+        )
     } else {
         return (
             <Grid container justifyContent="center" spacing={2}>
-                <Typography variant="h2" width="100%" textAlign="center" fontFamily={'Oxygen' }>{categoriaTraducida}</Typography>
+                <Typography variant="h2" width="100%" textAlign="center" fontFamily={'Oxygen'}>{categoriaTraducida}</Typography>
                 <ItemList productos={items}></ItemList>
             </Grid>
         );

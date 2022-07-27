@@ -1,6 +1,6 @@
 import { Button, Grid, TextField } from "@mui/material";
 import { useContext } from "react";
-import { contexto } from "../CartContext";
+import { contexto } from "./CartContext";
 import "./Form.css";
 
 

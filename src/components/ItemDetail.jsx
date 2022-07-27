@@ -2,7 +2,7 @@ import * as React from 'react';
 import { CardMedia, Typography, Grid, Button } from '@mui/material/';
 import ItemCount from './ItemCount';
 import { useState, useContext } from 'react';
-import { contexto } from '../CartContext';
+import { contexto } from './CartContext';
 
 
 function ItemDetail({ product }) {

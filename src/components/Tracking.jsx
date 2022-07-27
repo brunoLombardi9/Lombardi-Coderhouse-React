@@ -87,16 +87,19 @@ function Tracking() {
         )
     } else if (loading) {
         return (
-            <Cargando></Cargando>
+            <Cargando />
         )
     } else {
         let contenido;
-        if (resultado && tracking.length === 0) { contenido = "No encontramos lo que buscabas" }
-        if (resultado === false && error) { contenido = "Hubo un problema, intente nuevamente" }
+        if (resultado && tracking.length === 0) { contenido = <Typography variant="h2" textAlign="center">No encontramos lo que buscabas</Typography> }
+        if (resultado === false && error) { contenido = <Typography variant="h2" textAlign="center">Hubo un problema, intente nuevamente</Typography> }
         if (resultado && tracking.length > 0) {
             contenido =
                 <>
-                    <Typography variant="h4" mb="20px" >Orden: {input}</Typography>
+                    <Grid container justifyContent="center">
+                        <Typography variant="h4" mb="20px">Orden: {input}</Typography>
+                    </Grid>
+
                     <TablaPedido array={tracking} ></TablaPedido>
 
                     <Grid container justifyContent="center">
@@ -106,10 +109,11 @@ function Tracking() {
         }
 
         return (
-            <Grid container justifyContent="center" >
-                <Typography variant="h2" textAlign="center" width="100%">
+            <Grid container justifyContent="center">
+
+                <Grid item width="100%" mr="auto" ml="auto">
                     {contenido}
-                </Typography>
+                </Grid>
 
                 <Grid item >
                     <Link to="/tracking"><Button variant="contained" onClick={resetTracking} sx={{ mt: "20px", m: "15px" }}>Buscar de nuevo</Button></Link>

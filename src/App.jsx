@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import ItemsListContainer from './components/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import Carrito from './components/Carrito';
-import { CartContext } from './CartContext';
+import { CartContext } from './components/CartContext';
 import Tracking from './components/Tracking';
 import { ToastContainer } from 'react-toastify';
 import { ThemeProvider, createTheme } from '@mui/material/styles';

@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import { useContext, useEffect, useState } from "react";
-import { contexto } from "../CartContext";
+import { contexto } from "./CartContext";
 import './Tabla.css';
 import { Link } from "react-router-dom";
 import Form from "./Form";
@@ -63,7 +63,7 @@ function Carrito() {
 
     if (loading) {
         return (
-            <Cargando></Cargando>
+            <Cargando/>
         )
     } else if (idOrden !== "") {
         return (
@@ -73,7 +73,7 @@ function Carrito() {
         )
     } else if (error) {
         return (
-            <Error />
+            <Error/>
         )
     } else if (carrito.length > 0) {
 
@@ -95,7 +95,7 @@ function Carrito() {
                 </Grid>
             </>
         )
-    } else {
+    } else if (carrito.length === 0){
         return (
             <Grid container justifyContent="center" height="20vh">
                 <Typography variant="h3">Carrito Vacio</Typography>

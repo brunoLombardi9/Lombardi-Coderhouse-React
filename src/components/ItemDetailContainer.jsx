@@ -31,7 +31,7 @@ function ItemDetailContainer() {
 
 
     if (loading) {
-        return <Cargando></Cargando>
+        return <Cargando/>
     } else {
         return (
             <Grid container justifyContent={"center"}>
